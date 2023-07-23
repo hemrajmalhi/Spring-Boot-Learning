@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-
         @GetMapping("/student")
         public ResponseEntity<List<Student>> getStudent() {
            List<Student> students= this.studentService.getAllStudent();
@@ -36,12 +35,10 @@ public class StudentController {
     }
 
     @PostMapping("/student")
-    public Student addStudent(@RequestBody Student student){
-            Student b=this.studentService.addStudent(student);
-            System.out.println(b);
-            return b;
+    public ResponseEntity<String> addStudent(@RequestBody Student student){
+            studentService.addStudent(student);
+            return new ResponseEntity<>("Data is Added Successfully",HttpStatus.OK);
     }
-
 @DeleteMapping("/student/{sid}")
     public void deleteStudent(@PathVariable("sid") int sid){
     System.out.println(sid);
